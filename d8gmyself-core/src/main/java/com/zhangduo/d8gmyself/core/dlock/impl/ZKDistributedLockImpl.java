@@ -1,5 +1,6 @@
 package com.zhangduo.d8gmyself.core.dlock.impl;
 
+import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
@@ -111,6 +112,7 @@ public class ZKDistributedLockImpl implements DistributedLock {
 
     @Override
     public boolean tryLock(String key, int timeout, TimeUnit timeoutUnit) throws InterruptedException {
+        Preconditions.checkArgument(timeout > 0);
         return tryLock(key, timeoutUnit.toMillis(timeout));
     }
 

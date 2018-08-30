@@ -59,7 +59,7 @@ public class Subscriber {
             } else {
                 invokeSubscriberMethodSync(event);
             }
-        } catch (Exception e) {
+        } catch (Throwable e) {
             bus.handleSubscriberException(e, target, method, event);
         }
     }
