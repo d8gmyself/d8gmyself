@@ -30,6 +30,7 @@ public class Subscriber {
         this.allowConccurrency = allowConccurrency;
         this.async = async;
         this.executor = executor;
+        method.setAccessible(true);
     }
 
     /**
