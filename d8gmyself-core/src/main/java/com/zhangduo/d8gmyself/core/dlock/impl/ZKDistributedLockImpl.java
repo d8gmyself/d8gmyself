@@ -138,10 +138,11 @@ public class ZKDistributedLockImpl implements DistributedLock {
                                 if (waitMillis <= 0) {
                                     return false;
                                 } else {
-                                    interner.intern(path).wait(waitMillis);
+                                    interner.intern(path).wait(waitMillis / 2);
                                 }
                             } else {
-                                interner.intern(path).wait();
+                                //防止并发的情况下睡死过去，所以每隔50毫秒尝试一下
+                                interner.intern(path).wait(TimeUnit.MILLISECONDS.toMillis(50));
                             }
                         }
                     } catch (KeeperException.NoNodeException ex) {
