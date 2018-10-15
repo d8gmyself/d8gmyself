@@ -1,4 +1,4 @@
-package com.zhangduo.d8gmyself.core.eventbus;
+package com.d8gmyself.core.eventbus;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;

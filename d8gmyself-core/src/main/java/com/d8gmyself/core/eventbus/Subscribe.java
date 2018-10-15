@@ -1,4 +1,4 @@
-package com.zhangduo.d8gmyself.core.eventbus;
+package com.d8gmyself.core.eventbus;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

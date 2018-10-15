@@ -1,10 +1,10 @@
-package com.zhangduo.d8gmyself.core.dlock.impl;
+package com.d8gmyself.core.dlock.impl;
 
+import com.d8gmyself.core.dlock.DistributedLock;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.common.collect.Interner;
 import com.google.common.collect.Interners;
-import com.zhangduo.d8gmyself.core.dlock.DistributedLock;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;

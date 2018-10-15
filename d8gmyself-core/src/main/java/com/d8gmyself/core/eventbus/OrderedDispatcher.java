@@ -1,4 +1,4 @@
-package com.zhangduo.d8gmyself.core.eventbus;
+package com.d8gmyself.core.eventbus;
 
 import java.util.Comparator;
 import java.util.Iterator;

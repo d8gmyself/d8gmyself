@@ -1,4 +1,4 @@
-package com.zhangduo.d8gmyself.core.dlock;
+package com.d8gmyself.core.dlock;
 
 import java.util.concurrent.TimeUnit;
 
