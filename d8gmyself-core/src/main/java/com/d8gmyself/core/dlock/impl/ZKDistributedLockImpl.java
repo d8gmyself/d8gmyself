@@ -22,6 +22,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
+ * 简单实现
+ *
  * Created by ZhangDuo on 2016-11-19 14:59.
  */
 public class ZKDistributedLockImpl implements DistributedLock {
@@ -29,12 +31,7 @@ public class ZKDistributedLockImpl implements DistributedLock {
     private static final int DEFAULT_SESSION_TIMEOUT_MILLIS = 10 * 1000;
     private static final int DEFAULT_CONNECTION_TIMEOUT_MILLIS = 8 * 1000;
     private final CuratorFramework client;
-    private final ThreadLocal<Map<String, AtomicInteger>> count = new ThreadLocal<Map<String, AtomicInteger>>() {
-        @Override
-        protected Map<String, AtomicInteger> initialValue() {
-            return new ConcurrentHashMap<String, AtomicInteger>();
-        }
-    };
+    private final ThreadLocal<Map<String, AtomicInteger>> count = ThreadLocal.withInitial(ConcurrentHashMap::new);
     private final Interner<String> interner = Interners.newWeakInterner();
     private final Watcher myWatcher = new MyWatcher();
 
