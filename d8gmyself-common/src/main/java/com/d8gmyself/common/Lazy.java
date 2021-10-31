@@ -1,5 +1,7 @@
 package com.d8gmyself.common;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -9,7 +11,8 @@ import java.util.function.Supplier;
 public final class Lazy<T> implements Supplier<T> {
 
     private final Supplier<? extends T> supplier;
-    private volatile T value;
+    private volatile Object value;
+    private static final Object NULL = new Object();
 
     private Lazy(Supplier<? extends T> supplier) {
         this.supplier = supplier;
@@ -19,24 +22,22 @@ public final class Lazy<T> implements Supplier<T> {
         return new Lazy<>(supplier);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public T get() {
-        T currentValue = value;
+        Object currentValue = value;
         if (currentValue != null) {
-            return currentValue;
+            return currentValue == NULL ? null : (T) currentValue;
         }
         synchronized (this) {
             currentValue = value;
             if (currentValue != null) {
-                return currentValue;
+                return currentValue == NULL ? null : (T) currentValue;
             }
-            currentValue = supplier.get();
-            if (currentValue == null) {
-                throw new IllegalStateException("Lazy value can not be null");
-            }
+            currentValue = ObjectUtils.defaultIfNull(supplier.get(), NULL);
             value = currentValue;
         }
-        return currentValue;
+        return currentValue == NULL ? null : (T) currentValue;
     }
 
     public <S> Lazy<S> map(Function<? super T, ? extends S> function) {
